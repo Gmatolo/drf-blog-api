@@ -2,13 +2,16 @@
 # reference the blog database models==table
 # srialize API data 
 
-from rest_framework import generics
-
 # import local data
 from blog.models import Post
+from rest_framework import generics
+from rest_framework.permissions import IsAdminUser
+
 from .serializers import PostSerializer
 
+
 class PostList(generics.ListCreateAPIView):
+    permission_classes = [IsAdminUser]
     queryset = Post.postobjects.all()
     serializer_class = PostSerializer
     pass
